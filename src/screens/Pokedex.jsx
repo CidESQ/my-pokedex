@@ -20,22 +20,21 @@ export default function Pokedex() {
     try{
       const response = await getPokemonsApi();     
       const pokemonsArray = [];
-      console.log(response.results);
-      console.log('-----')
-      console.log(response.results[0].url)
-
-      // for await (const pokemon of response.results){
-      //   const pokemonDetails = await getPokemonDetailsByUrlAPI(pokemon.url);
-      //   pokemonsArray.push({
-      //     id: pokemonDetails.id,
-      //     name: pokemonDetails.name,
-      //     type: pokemonDetails.types[0].name,
-      //     order: pokemonDetails.order,
-      //     image: pokemonDetails.sprites.other['official-artwork'].front_default
-      //   });
-      // }
+      // console.log(response.results);
+      // console.log('-----')
+      // console.log(response.results[0].url)
+      for await (const pokemon of response.results){
+        const pokemonDetails = await getPokemonDetailsByUrlAPI(pokemon.url);
+        pokemonsArray.push({
+          id: pokemonDetails.id,
+          name: pokemonDetails.name,
+          type: pokemonDetails.types[0].type.name,
+          order: pokemonDetails.order,
+          image: pokemonDetails.sprites.other['official-artwork'].front_default
+        });
+      }
       
-      // setPokemons([...pokemons, ...pokemonsArray]);
+      setPokemons([...pokemons, ...pokemonsArray]);
     }catch(error){
       console.log(error);
     }
