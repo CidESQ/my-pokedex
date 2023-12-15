@@ -1,28 +1,25 @@
-import { View, Text, SafeAreaView } from 'react-native'
+import { View , Text} from 'react-native'
 import React, { useState, useEffect } from 'react'
 
 import {getPokemonsApi, getPokemonDetailsByUrlAPI} from '../API/pokemon'
+import PokemonList from '../components/PokemonList';
 
 export default function Pokedex() {
   const [pokemons, setPokemons] = useState([]);
 
-  console.log("Pokemones -> ", pokemons);
+  // console.log("Pokemones -> ", pokemons);
   //! No se usa async en useEffect 
   useEffect(() => {
-    //Crear una función anónima auto-ejecutable
+    //? Crear una función anónima auto-ejecutable
     (async() => {
       await loadPokemons();
     })();
   }, []);
   
-
   const loadPokemons = async () => {
     try{
       const response = await getPokemonsApi();     
       const pokemonsArray = [];
-      // console.log(response.results);
-      // console.log('-----')
-      // console.log(response.results[0].url)
       for await (const pokemon of response.results){
         const pokemonDetails = await getPokemonDetailsByUrlAPI(pokemon.url);
         pokemonsArray.push({
@@ -42,7 +39,7 @@ export default function Pokedex() {
   
   return (
     <View>
-      <Text> Pokedex</Text>
+      <PokemonList pokemons={pokemons}/>
     </View>
   );
 }
