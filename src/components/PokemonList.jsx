@@ -4,10 +4,10 @@ import React from 'react'
 import PokemonCard from '../components/PokemonCard';
 
 export default function PokemonList(props) {
-    const {pokemons} = props;
+    const {pokemons, loadPokemons} = props;
 
   const loadMore = () => {
-    
+    loadPokemons();
   };
 
   return (
