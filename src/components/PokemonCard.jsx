@@ -30,7 +30,11 @@ export default function PokemonCard(props) {
 const styles = StyleSheet.create({
     card: {
         flex: 1,
-        height: 130
+        height: 130,
+        shadowColor: '#171717',
+        shadowOffset: {width: 0, height:5},
+        shadowOpacity: 0.5,
+        shadowRadius: 3
     },
     spacing: {
         flex:1,
